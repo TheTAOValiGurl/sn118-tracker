@@ -6,3 +6,10 @@ run_timestamp,label,coldkey_short,validators,period_start_alpha,current_alpha,ea
 2026-05-24 08:01 PST,Wallet5_TAOcom,5DcFxprQ...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on&netuid=118&limit=50,,,
 2026-05-24 08:01 PST,Wallet6_taobotTAOcom,5GUEJ2h8...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U&netuid=118&limit=50,,,
 2026-05-24 08:01 PST,Wallet7_DittoTAOcom,5HYKqWwQ...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg&netuid=118&limit=50,,,
+2026-05-24 08:08 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,N/A,29972.701474,NO_HISTORY
+2026-05-24 08:08 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,N/A,30008.671872,NO_HISTORY
+2026-05-24 08:08 PST,Wallet3_taobotE2L,5CZtgF1x...QoVL4f,tao.bot,N/A,30276.145884,NO_HISTORY
+2026-05-24 08:08 PST,Wallet4_TAOcom,5FnxK1zn...2AdWsE,TAO.com,N/A,1574.849748,NO_HISTORY
+2026-05-24 08:08 PST,Wallet5_TAOcom,5DcFxprQ...NnD9on,TAO.com,N/A,9721.844712,NO_HISTORY
+2026-05-24 08:08 PST,Wallet6_taobotTAOcom,5GUEJ2h8...FpmN6U,tao.bot + TAO.com,N/A,6433.459153,NO_HISTORY
+2026-05-24 08:08 PST,Wallet7_DittoTAOcom,5HYKqWwQ...UTiHGg,Ditto + TAO.com,N/A,8152.730498,NO_HISTORY
