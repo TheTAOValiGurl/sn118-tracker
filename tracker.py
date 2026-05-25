@@ -57,27 +57,20 @@ def get_current_positions(coldkey):
         })
     return positions
 
-def get_balance_at_last_midnight(coldkey, hotkey_ss58):
-    """Get the stake balance snapshot at the most recent midnight UTC.
+def get_balance_24h_ago(coldkey, hotkey_ss58):
+    """Get the stake balance snapshot closest to exactly 24 hours ago.
 
-    taostats stores history snapshots once per day at midnight UTC.
-    We search a 4-hour window centered on the most recent midnight UTC
-    to reliably catch the snapshot regardless of what time the script runs.
+    Matches doug's 'days=1' period_start_alpha.
+    We search a 4-hour window centered on exactly 24 hours ago (22-26h back).
+    If nothing found, widens to 20-28h.
     """
     now_utc = datetime.now(timezone.utc)
+    target_24h = now_utc - timedelta(hours=24)
 
-    # Most recent midnight UTC
-    last_midnight = now_utc.replace(hour=0, minute=0, second=0, microsecond=0)
+    ts_start = int((now_utc - timedelta(hours=26)).timestamp())
+    ts_end   = int((now_utc - timedelta(hours=22)).timestamp())
 
-    # If we are within 5 minutes of midnight, use yesterday's midnight to be safe
-    if (now_utc - last_midnight).total_seconds() < 300:
-        last_midnight = last_midnight - timedelta(days=1)
-
-    # Search window: 2 hours before to 2 hours after midnight
-    ts_start = int((last_midnight - timedelta(hours=2)).timestamp())
-    ts_end   = int((last_midnight + timedelta(hours=2)).timestamp())
-
-    print(f"    Querying history window: {last_midnight.strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"    Querying 24h-ago window: ~{target_24h.strftime('%Y-%m-%d %H:%M UTC')}")
 
     data = api_get(f"{BASE}/history/v1", {
         "coldkey":         coldkey,
@@ -89,8 +82,24 @@ def get_balance_at_last_midnight(coldkey, hotkey_ss58):
         "limit":           1,
     })
     items = data.get("data", [])
+
     if not items:
-        return None, None
+        ts_start2 = int((now_utc - timedelta(hours=28)).timestamp())
+        ts_end2   = int((now_utc - timedelta(hours=20)).timestamp())
+        print(f"    No result, widening to 20-28h window...")
+        data2 = api_get(f"{BASE}/history/v1", {
+            "coldkey":         coldkey,
+            "hotkey":          hotkey_ss58,
+            "netuid":          NETUID,
+            "timestamp_start": ts_start2,
+            "timestamp_end":   ts_end2,
+            "order":           "timestamp_desc",
+            "limit":           1,
+        })
+        items = data2.get("data", [])
+        if not items:
+            return None, None
+
     item = items[0]
     bal  = rao_to_alpha(item.get("balance", 0))
     ts   = item.get("timestamp", "?")
@@ -119,15 +128,15 @@ def process_wallet(coldkey, label):
     for pos in positions:
         current_total += pos["balance_alpha"]
         validator_names.append(pos["hotkey_name"])
-        print(f"  Validator: {pos['hotkey_name']}, current: {pos['balance_alpha']:.4f} alpha")
+        print(f"  Validator: {pos['hotkey_name']}, current: {pos['balance_alpha']:.6f} alpha")
 
-        bal_midnight, ts_midnight = get_balance_at_last_midnight(coldkey, pos["hotkey_ss58"])
-        if bal_midnight is not None:
-            period_start_total += bal_midnight
-            print(f"    Midnight snapshot: {bal_midnight:.4f} alpha (ts: {ts_midnight})")
+        bal_24h, ts_24h = get_balance_24h_ago(coldkey, pos["hotkey_ss58"])
+        if bal_24h is not None:
+            period_start_total += bal_24h
+            print(f"    24h-ago snapshot: {bal_24h:.6f} alpha (ts: {ts_24h})")
         else:
             history_found = False
-            print(f"    No midnight snapshot found for {pos['hotkey_name']}")
+            print(f"    No 24h-ago snapshot found for {pos['hotkey_name']}")
 
     if not history_found:
         earned_str = "NO_HISTORY"
@@ -147,6 +156,7 @@ def main():
     now_pst = datetime.now(timezone(timedelta(hours=-8)))
     run_ts  = now_pst.strftime("%Y-%m-%d %H:%M PST")
     print(f"\nStarting SN118 tracker run at {run_ts}")
+    print(f"Period start = balance from ~24 hours ago (matching doug days=1)")
     print(f"Rate limit delay: {RATE_LIMIT_DELAY}s between requests\n")
 
     rows = []
