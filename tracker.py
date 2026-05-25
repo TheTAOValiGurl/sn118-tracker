@@ -22,153 +22,123 @@ WALLETS = [
     ("5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg", "Wallet7_DittoTAOcom"),
 ]
 
-BASE    = "https://api.taostats.io/api/dtao/stake_balance"
-HEADERS = {"accept": "application/json", "Authorization": API_KEY}
-RAO     = 1_000_000_000
+HEADERS = {
+    "Authorization": API_KEY,
+    "accept": "application/json",
+}
+BASE_URL = "https://api.taostats.io/api"
 
-request_count = 0
-
-def api_get(url, params):
-    global request_count
-    if request_count > 0:
-        print(f"  [rate limit pause {RATE_LIMIT_DELAY}s]")
-        time.sleep(RATE_LIMIT_DELAY)
-    request_count += 1
-    r = requests.get(url, headers=HEADERS, params=params, timeout=30)
-    r.raise_for_status()
-    return r.json()
-
-def rao_to_alpha(val):
-    try:
-        return int(val) / RAO
-    except (TypeError, ValueError):
-        return 0.0
 
 def get_current_positions(coldkey):
-    data = api_get(f"{BASE}/latest/v1", {
-        "coldkey": coldkey, "netuid": NETUID, "limit": 50
-    })
+    url = f"{BASE_URL}/dtao/stake_balance/latest/v1"
+    params = {"coldkey": coldkey, "netuid": NETUID, "limit": 20}
+    resp = requests.get(url, headers=HEADERS, params=params, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
     positions = []
     for item in data.get("data", []):
-        positions.append({
-            "hotkey_ss58":   item["hotkey"]["ss58"],
-            "hotkey_name":   item.get("hotkey_name") or item["hotkey"]["ss58"][:12],
-            "balance_alpha": rao_to_alpha(item.get("balance", 0)),
-        })
+        bal = int(item["balance"]) / 1e9
+        if bal > 0:
+            positions.append({
+                "hotkey": item["hotkey"]["ss58"],
+                "hotkey_name": item.get("hotkey_name", "unknown"),
+                "balance": bal
+            })
     return positions
 
-def get_balance_24h_ago(coldkey, hotkey_ss58):
-    """Get the stake balance snapshot closest to exactly 24 hours ago.
 
-    Matches doug's 'days=1' period_start_alpha.
-    We search a 4-hour window centered on exactly 24 hours ago (22-26h back).
-    If nothing found, widens to 20-28h.
-    """
-    now_utc = datetime.now(timezone.utc)
-    target_24h = now_utc - timedelta(hours=24)
-
-    ts_start = int((now_utc - timedelta(hours=26)).timestamp())
-    ts_end   = int((now_utc - timedelta(hours=22)).timestamp())
-
-    print(f"    Querying 24h-ago window: ~{target_24h.strftime('%Y-%m-%d %H:%M UTC')}")
-
-    data = api_get(f"{BASE}/history/v1", {
-        "coldkey":         coldkey,
-        "hotkey":          hotkey_ss58,
-        "netuid":          NETUID,
-        "timestamp_start": ts_start,
-        "timestamp_end":   ts_end,
-        "order":           "timestamp_desc",
-        "limit":           1,
-    })
+def get_midnight_snapshot(coldkey, hotkey):
+    url = f"{BASE_URL}/dtao/stake_balance/history/v1"
+    params = {
+        "coldkey": coldkey,
+        "hotkey": hotkey,
+        "netuid": NETUID,
+        "days": 1,
+        "limit": 50,
+    }
+    resp = requests.get(url, headers=HEADERS, params=params, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
     items = data.get("data", [])
-
     if not items:
-        ts_start2 = int((now_utc - timedelta(hours=28)).timestamp())
-        ts_end2   = int((now_utc - timedelta(hours=20)).timestamp())
-        print(f"    No result, widening to 20-28h window...")
-        data2 = api_get(f"{BASE}/history/v1", {
-            "coldkey":         coldkey,
-            "hotkey":          hotkey_ss58,
-            "netuid":          NETUID,
-            "timestamp_start": ts_start2,
-            "timestamp_end":   ts_end2,
-            "order":           "timestamp_desc",
-            "limit":           1,
-        })
-        items = data2.get("data", [])
-        if not items:
-            return None, None
+        return None, None
+    for item in items:
+        ts = item["timestamp"]
+        hour_part = ts[11:16]
+        if hour_part >= "23:50":
+            bal = int(item["balance"]) / 1e9
+            return bal, ts
+    newest = items[0]
+    return int(newest["balance"]) / 1e9, newest["timestamp"]
 
-    item = items[0]
-    bal  = rao_to_alpha(item.get("balance", 0))
-    ts   = item.get("timestamp", "?")
-    return bal, ts
 
-def process_wallet(coldkey, label):
-    print(f"\nProcessing {label} ({coldkey[:8]}...)")
-
+def get_wallet_data(coldkey, label):
+    now_utc = datetime.now(timezone.utc)
+    run_ts = now_utc.strftime("%Y-%m-%d %H:%M:%S UTC")
+    run_date = now_utc.strftime("%Y-%m-%d")
+    print(f"  Fetching current positions for {label}...")
     positions = get_current_positions(coldkey)
+    time.sleep(RATE_LIMIT_DELAY)
     if not positions:
-        print(f"  No positions found!")
         return {
-            "label":              label,
-            "coldkey_short":      coldkey[:8] + "..." + coldkey[-6:],
-            "validators":         "NO_POSITION",
-            "period_start_alpha": "N/A",
-            "current_alpha":      0.0,
-            "earned_alpha":       "NO_POSITION",
+            "run_timestamp": run_ts, "run_date": run_date,
+            "wallet_label": label, "coldkey": coldkey,
+            "hotkey": "N/A", "hotkey_name": "N/A",
+            "current_alpha": "N/A", "period_start_alpha": "N/A",
+            "earned_alpha": "N/A", "notes": "no_active_positions",
         }
-
-    current_total      = 0.0
-    period_start_total = 0.0
-    history_found      = True
-    validator_names    = []
-
-    for pos in positions:
-        current_total += pos["balance_alpha"]
-        validator_names.append(pos["hotkey_name"])
-        print(f"  Validator: {pos['hotkey_name']}, current: {pos['balance_alpha']:.6f} alpha")
-
-        bal_24h, ts_24h = get_balance_24h_ago(coldkey, pos["hotkey_ss58"])
-        if bal_24h is not None:
-            period_start_total += bal_24h
-            print(f"    24h-ago snapshot: {bal_24h:.6f} alpha (ts: {ts_24h})")
+    total_current = 0.0
+    total_period_start = 0.0
+    hotkey_names = []
+    missing_history = []
+    period_start_ts = None
+    for i, pos in enumerate(positions):
+        total_current += pos["balance"]
+        hotkey_names.append(pos["hotkey_name"] or pos["hotkey"][:12])
+        print(f"  Fetching history for {pos['hotkey_name']} ({pos['hotkey'][:12]})...")
+        ps_bal, ps_ts = get_midnight_snapshot(coldkey, pos["hotkey"])
+        if i < len(positions) - 1:
+            time.sleep(RATE_LIMIT_DELAY)
+        if ps_bal is not None:
+            total_period_start += ps_bal
+            if period_start_ts is None:
+                period_start_ts = ps_ts
+            print(f"    period_start={ps_bal:.6f} (from {ps_ts})")
         else:
-            history_found = False
-            print(f"    No 24h-ago snapshot found for {pos['hotkey_name']}")
-
-    if not history_found:
-        earned_str = "NO_HISTORY"
+            missing_history.append(pos["hotkey_name"] or pos["hotkey"][:12])
+            print(f"    WARNING: No history found for {pos['hotkey_name']}")
+    time.sleep(RATE_LIMIT_DELAY)
+    if missing_history and total_period_start == 0.0:
+        notes = f"NO_HISTORY: {'+'.join(missing_history)}"
+        earned = "N/A"
+        period_start_str = "N/A"
+    elif missing_history:
+        notes = f"PARTIAL missing:{'+'.join(missing_history)}"
+        earned = total_current - total_period_start
+        period_start_str = f"{total_period_start:.6f}"
     else:
-        earned_str = round(current_total - period_start_total, 6)
-
+        earned = total_current - total_period_start
+        notes = f"validators:{'+'.join(hotkey_names)}"
+        period_start_str = f"{total_period_start:.6f}"
     return {
-        "label":              label,
-        "coldkey_short":      coldkey[:8] + "..." + coldkey[-6:],
-        "validators":         " + ".join(validator_names),
-        "period_start_alpha": round(period_start_total, 6) if history_found else "N/A",
-        "current_alpha":      round(current_total, 6),
-        "earned_alpha":       earned_str,
+        "run_timestamp": run_ts, "run_date": run_date,
+        "wallet_label": label, "coldkey": coldkey,
+        "hotkey": "+".join(p["hotkey"][:12] for p in positions),
+        "hotkey_name": "+".join(hotkey_names),
+        "current_alpha": f"{total_current:.6f}",
+        "period_start_alpha": period_start_str,
+        "earned_alpha": f"{earned:.6f}" if earned != "N/A" else "N/A",
+        "notes": notes,
     }
 
-def main():
-    now_pst = datetime.now(timezone(timedelta(hours=-8)))
-    run_ts  = now_pst.strftime("%Y-%m-%d %H:%M PST")
-    print(f"\nStarting SN118 tracker run at {run_ts}")
-    print(f"Period start = balance from ~24 hours ago (matching doug days=1)")
-    print(f"Rate limit delay: {RATE_LIMIT_DELAY}s between requests\n")
 
-    rows = []
-    for coldkey, label in WALLETS:
-        result = process_wallet(coldkey, label)
-        result["run_timestamp"] = run_ts
-        rows.append(result)
-
-    fieldnames = ["run_timestamp", "label", "coldkey_short", "validators",
-                  "period_start_alpha", "current_alpha", "earned_alpha"]
-
-    file_exists = os.path.exists(OUTPUT_CSV)
+def append_to_csv(rows):
+    fieldnames = [
+        "run_timestamp", "run_date", "wallet_label", "coldkey",
+        "hotkey", "hotkey_name",
+        "current_alpha", "period_start_alpha", "earned_alpha", "notes"
+    ]
+    file_exists = os.path.isfile(OUTPUT_CSV)
     with open(OUTPUT_CSV, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         if not file_exists:
@@ -176,10 +146,21 @@ def main():
         for row in rows:
             writer.writerow(row)
 
-    print(f"\nDone - {len(rows)} rows written to {OUTPUT_CSV}")
-    for r in rows:
-        print(f"  {r['label']}: start={r['period_start_alpha']}  "
-              f"current={r['current_alpha']}  earned={r['earned_alpha']}")
+
+def main():
+    if not API_KEY:
+        raise RuntimeError("TAOSTATS_API_KEY environment variable not set")
+    print(f"Starting SN118 tracker run at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
+    rows = []
+    for coldkey, label in WALLETS:
+        print(f"\nProcessing {label} ({coldkey[:12]}...):")
+        row = get_wallet_data(coldkey, label)
+        rows.append(row)
+        print(f"  Result: current={row['current_alpha']}, period_start={row['period_start_alpha']}, earned={row['earned_alpha']}")
+    append_to_csv(rows)
+    print(f"\nDone! Appended {len(rows)} rows to {OUTPUT_CSV}")
+
 
 if __name__ == "__main__":
     main()
+
