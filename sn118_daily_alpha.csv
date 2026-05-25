@@ -1,39 +1,4 @@
-run_timestamp,label,coldkey_short,validators,period_start_alpha,current_alpha,earned_alpha
-2026-05-24 08:01 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,0.0,29972.701474,29972.701474
-2026-05-24 08:01 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,0.0,30008.671872,30008.671872
-2026-05-24 08:01 PST,Wallet3_taobotE2L,5CZtgF1x...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/history/v1?coldkey=5CZtgF1xChRMKXrihA62smGMvhtRCaSsyz1tRqngCJQoVL4f&hotkey=5E2LP6EnZ54m3wS8s1yPvD5c3xo71kQroBw7aUVK32TKeZ5u&netuid=118&timestamp_start=1779530491&timestamp_end=1779566491&order=timestamp_desc&limit=1,,,
-2026-05-24 08:01 PST,Wallet4_TAOcom,5FnxK1zn...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5FnxK1znrcQka73mPaHJgY4s14ryGVvmXtUwFHw9so2AdWsE&netuid=118&limit=50,,,
-2026-05-24 08:01 PST,Wallet5_TAOcom,5DcFxprQ...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on&netuid=118&limit=50,,,
-2026-05-24 08:01 PST,Wallet6_taobotTAOcom,5GUEJ2h8...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U&netuid=118&limit=50,,,
-2026-05-24 08:01 PST,Wallet7_DittoTAOcom,5HYKqWwQ...,ERROR: 429 Client Error: Too Many Requests for url: https://api.taostats.io/api/dtao/stake_balance/latest/v1?coldkey=5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg&netuid=118&limit=50,,,
-2026-05-24 08:08 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,N/A,29972.701474,NO_HISTORY
-2026-05-24 08:08 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,N/A,30008.671872,NO_HISTORY
-2026-05-24 08:08 PST,Wallet3_taobotE2L,5CZtgF1x...QoVL4f,tao.bot,N/A,30276.145884,NO_HISTORY
-2026-05-24 08:08 PST,Wallet4_TAOcom,5FnxK1zn...2AdWsE,TAO.com,N/A,1574.849748,NO_HISTORY
-2026-05-24 08:08 PST,Wallet5_TAOcom,5DcFxprQ...NnD9on,TAO.com,N/A,9721.844712,NO_HISTORY
-2026-05-24 08:08 PST,Wallet6_taobotTAOcom,5GUEJ2h8...FpmN6U,tao.bot + TAO.com,N/A,6433.459153,NO_HISTORY
-2026-05-24 08:08 PST,Wallet7_DittoTAOcom,5HYKqWwQ...UTiHGg,Ditto + TAO.com,N/A,8152.730498,NO_HISTORY
-2026-05-25 07:16 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,N/A,30002.553641,NO_HISTORY
-2026-05-25 07:16 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,N/A,30046.12891,NO_HISTORY
-2026-05-25 07:16 PST,Wallet3_taobotE2L,5CZtgF1x...QoVL4f,tao.bot,N/A,30314.503733,NO_HISTORY
-2026-05-25 07:16 PST,Wallet4_TAOcom,5FnxK1zn...2AdWsE,TAO.com,N/A,1576.653652,NO_HISTORY
-2026-05-25 07:16 PST,Wallet5_TAOcom,5DcFxprQ...NnD9on,Rizzo (Insured),N/A,9732.853754,NO_HISTORY
-2026-05-25 07:16 PST,Wallet6_taobotTAOcom,5GUEJ2h8...FpmN6U,Tensorplex Labs,N/A,6441.405555,NO_HISTORY
-2026-05-25 07:16 PST,Wallet7_DittoTAOcom,5HYKqWwQ...UTiHGg,Datura,N/A,8161.010334,NO_HISTORY
-2026-05-25 07:25 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,29983.513017,30002.553641,19.040624
-2026-05-25 07:25 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,30022.495756,30046.12891,23.633154
-2026-05-25 07:25 PST,Wallet3_taobotE2L,5CZtgF1x...QoVL4f,tao.bot,30290.449504,30314.503733,24.054229
-2026-05-25 07:25 PST,Wallet4_TAOcom,5FnxK1zn...2AdWsE,TAO.com,1575.511819,1576.653652,1.141833
-2026-05-25 07:25 PST,Wallet5_TAOcom,5DcFxprQ...NnD9on,Rizzo (Insured),N/A,9732.853754,NO_HISTORY
-2026-05-25 07:25 PST,Wallet6_taobotTAOcom,5GUEJ2h8...FpmN6U,Tensorplex Labs,N/A,6441.405555,NO_HISTORY
-2026-05-25 07:25 PST,Wallet7_DittoTAOcom,5HYKqWwQ...UTiHGg,Datura,N/A,8161.010334,NO_HISTORY
-2026-05-25 07:42 PST,Wallet1_Ditto,5GU1RuZT...nvLCPJ,Ditto,N/A,30004.09342,NO_HISTORY
-2026-05-25 07:42 PST,Wallet2_1T1BAI,5F9tvGHY...vpu2sy,1T1B.AI,N/A,30048.107779,NO_HISTORY
-2026-05-25 07:42 PST,Wallet3_taobotE2L,5CZtgF1x...QoVL4f,tao.bot,N/A,30316.588308,NO_HISTORY
-2026-05-25 07:42 PST,Wallet4_TAOcom,5FnxK1zn...2AdWsE,TAO.com,N/A,1576.755499,NO_HISTORY
-2026-05-25 07:42 PST,Wallet5_TAOcom,5DcFxprQ...NnD9on,Rizzo (Insured),N/A,9733.367001,NO_HISTORY
-2026-05-25 07:42 PST,Wallet6_taobotTAOcom,5GUEJ2h8...FpmN6U,Tensorplex Labs,N/A,6441.751331,NO_HISTORY
-2026-05-25 07:42 PST,Wallet7_DittoTAOcom,5HYKqWwQ...UTiHGg,Datura,N/A,8161.637799,NO_HISTORY
+run_timestamp,run_date,wallet_label,coldkey,hotkey,hotkey_name,current_alpha,period_start_alpha,earned_alpha,notes
 2026-05-25 17:08:16 UTC,2026-05-25,Wallet1_Ditto,5GU1RuZTnencf9ETjtStxSWrh5UyMUxpJDjy5Y74fCnvLCPJ,5HmP9732JFjn,Ditto,30005.645110,29983.513017,22.132093,validators:Ditto
 2026-05-25 17:08:47 UTC,2026-05-25,Wallet2_1T1BAI,5F9tvGHYMkoJ95biTvmscmnW6bxzXq5VUsGhX4q4fZvpu2sy,5G9hfkx9wGB1,1T1B.AI,30050.085170,30022.495756,27.589414,validators:1T1B.AI
 2026-05-25 17:09:20 UTC,2026-05-25,Wallet3_taobotE2L,5CZtgF1xChRMKXrihA62smGMvhtRCaSsyz1tRqngCJQoVL4f,5E2LP6EnZ54m,tao.bot,30318.670235,30290.449504,28.220731,validators:tao.bot
