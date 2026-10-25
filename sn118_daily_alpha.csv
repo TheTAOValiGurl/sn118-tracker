@@ -1056,3 +1056,10 @@ run_timestamp,run_date,wallet_label,coldkey,hotkey,hotkey_name,current_alpha,per
 2026-10-24 18:20:07 UTC,2026-10-24,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11459.234232,11449.393385,9.840847,validators:Rizzo (Insured)
 2026-10-24 18:20:38 UTC,2026-10-24,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,7769.206365,7761.714846,7.491519,validators:Tensorplex Labs
 2026-10-24 18:21:09 UTC,2026-10-24,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,9768.123246,9757.783454,10.339792,validators:Datura
+2026-10-25 18:30:30 UTC,2026-10-25,Wallet1_Ditto,5GU1RuZTnencf9ETjtStxSWrh5UyMUxpJDjy5Y74fCnvLCPJ,5HEouuDaDASn+5HT9U1J85fyN,Ditto+Bitstarter.ai,32261.293079,32233.920982,27.372097,validators:Ditto+Bitstarter.ai
+2026-10-25 18:31:17 UTC,2026-10-25,Wallet2_1T1BAI,5F9tvGHYMkoJ95biTvmscmnW6bxzXq5VUsGhX4q4fZvpu2sy,5HEouuDaDASn+5G9hfkx9wGB1+5HT9U1J85fyN,Ditto+1T1B.AI+Bitstarter.ai,28342.093527,28317.837727,24.255800,validators:Ditto+1T1B.AI+Bitstarter.ai
+2026-10-25 18:32:19 UTC,2026-10-25,Wallet3_taobotE2L,5CZtgF1xChRMKXrihA62smGMvhtRCaSsyz1tRqngCJQoVL4f,5CqJAjSjv8fj,"Yuma, a DCG Company",36193.533320,36154.890981,38.642339,"validators:Yuma, a DCG Company"
+2026-10-25 18:32:51 UTC,2026-10-25,Wallet4_TAOcom,5FnxK1znrcQka73mPaHJgY4s14ryGVvmXtUwFHw9so2AdWsE,5HK5tp6t2S59,TAO.com,1665.099127,1663.571202,1.527925,validators:TAO.com
+2026-10-25 18:33:22 UTC,2026-10-25,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11472.488744,11462.522419,9.966325,validators:Rizzo (Insured)
+2026-10-25 18:33:53 UTC,2026-10-25,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,7778.785626,7771.647671,7.137955,validators:Tensorplex Labs
+2026-10-25 18:34:24 UTC,2026-10-25,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,9781.345958,9771.492946,9.853011,validators:Datura
