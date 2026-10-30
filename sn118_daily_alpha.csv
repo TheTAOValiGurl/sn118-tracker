@@ -1091,3 +1091,10 @@ run_timestamp,run_date,wallet_label,coldkey,hotkey,hotkey_name,current_alpha,per
 2026-10-29 20:28:12 UTC,2026-10-29,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11526.634588,11515.390427,11.244161,validators:Rizzo (Insured)
 2026-10-29 20:28:44 UTC,2026-10-29,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,7820.197188,7811.655782,8.541406,validators:Tensorplex Labs
 2026-10-29 20:29:15 UTC,2026-10-29,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,9838.526629,9826.730312,11.796317,validators:Datura
+2026-10-30 19:58:44 UTC,2026-10-30,Wallet1_Ditto,5GU1RuZTnencf9ETjtStxSWrh5UyMUxpJDjy5Y74fCnvLCPJ,5HEouuDaDASn+5HT9U1J85fyN,Ditto+Bitstarter.ai,32456.386238,32424.020016,32.366223,validators:Ditto+Bitstarter.ai
+2026-10-30 19:59:31 UTC,2026-10-30,Wallet2_1T1BAI,5F9tvGHYMkoJ95biTvmscmnW6bxzXq5VUsGhX4q4fZvpu2sy,5HEouuDaDASn+5G9hfkx9wGB1+5HT9U1J85fyN,Ditto+1T1B.AI+Bitstarter.ai,28514.653018,28486.029232,28.623786,validators:Ditto+1T1B.AI+Bitstarter.ai
+2026-10-30 20:00:34 UTC,2026-10-30,Wallet3_taobotE2L,5CZtgF1xChRMKXrihA62smGMvhtRCaSsyz1tRqngCJQoVL4f,5CqJAjSjv8fj,"Yuma, a DCG Company",36410.275377,36375.029671,35.245707,"validators:Yuma, a DCG Company"
+2026-10-30 20:01:05 UTC,2026-10-30,Wallet4_TAOcom,5FnxK1znrcQka73mPaHJgY4s14ryGVvmXtUwFHw9so2AdWsE,5HK5tp6t2S59,TAO.com,1676.109785,1674.279861,1.829924,validators:TAO.com
+2026-10-30 20:01:36 UTC,2026-10-30,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11539.599934,11528.544100,11.055834,validators:Rizzo (Insured)
+2026-10-30 20:02:07 UTC,2026-10-30,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,7830.223731,7821.674938,8.548792,validators:Tensorplex Labs
+2026-10-30 20:02:39 UTC,2026-10-30,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,9852.375639,9840.567640,11.807999,validators:Datura
