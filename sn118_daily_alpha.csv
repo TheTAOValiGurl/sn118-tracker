@@ -1203,3 +1203,10 @@ run_timestamp,run_date,wallet_label,coldkey,hotkey,hotkey_name,current_alpha,per
 2026-11-14 20:02:43 UTC,2026-11-14,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11791.998581,11777.474928,14.523653,validators:Rizzo (Insured)
 2026-11-14 20:03:14 UTC,2026-11-14,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,8023.070174,8012.065226,11.004948,validators:Tensorplex Labs
 2026-11-14 20:03:44 UTC,2026-11-14,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,10116.536571,10101.327331,15.209241,validators:Datura
+2026-11-15 20:27:56 UTC,2026-11-15,Wallet1_Ditto,5GU1RuZTnencf9ETjtStxSWrh5UyMUxpJDjy5Y74fCnvLCPJ,5HEouuDaDASn+5HT9U1J85fyN+5G9hfkx9wGB1,Ditto+Bitstarter.ai+1T1B.AI,35903.984723,35855.346573,48.638151,validators:Ditto+Bitstarter.ai+1T1B.AI
+2026-11-15 20:28:58 UTC,2026-11-15,Wallet2_1T1BAI,5F9tvGHYMkoJ95biTvmscmnW6bxzXq5VUsGhX4q4fZvpu2sy,5HEouuDaDASn+5HT9U1J85fyN+5G9hfkx9wGB1,Ditto+Bitstarter.ai+1T1B.AI,30823.475717,30782.226102,41.249614,validators:Ditto+Bitstarter.ai+1T1B.AI
+2026-11-15 20:30:00 UTC,2026-11-15,Wallet3_taobotE2L,5CZtgF1xChRMKXrihA62smGMvhtRCaSsyz1tRqngCJQoVL4f,N/A,N/A,N/A,N/A,N/A,no_active_positions
+2026-11-15 20:30:15 UTC,2026-11-15,Wallet4_TAOcom,5FnxK1znrcQka73mPaHJgY4s14ryGVvmXtUwFHw9so2AdWsE,5HK5tp6t2S59,TAO.com,1720.507902,1717.983019,2.524883,validators:TAO.com
+2026-11-15 20:30:46 UTC,2026-11-15,Wallet5_TAOcom,5DcFxprQ9LCwezrjetRwfJeAd2bVTVgzu3eENRg9tGNnD9on,5CFtzzb4vym9,Rizzo (Insured),11811.065319,11795.624576,15.440743,validators:Rizzo (Insured)
+2026-11-15 20:31:17 UTC,2026-11-15,Wallet6_taobotTAOcom,5GUEJ2h8anTrN2UpJTTyPopbKKCRkAC3WsFc2wrqTbFpmN6U,5E4z3h9yVhmQ,Tensorplex Labs,8037.636863,8025.841456,11.795408,validators:Tensorplex Labs
+2026-11-15 20:31:48 UTC,2026-11-15,Wallet7_DittoTAOcom,5HYKqWwQgcWnRNbzCwX6gDA9RF6VBdAmaKxJFyQ17NUTiHGg,5GP7c3fFazW9,Datura,10136.651188,10120.364154,16.287034,validators:Datura
